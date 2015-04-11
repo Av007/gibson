@@ -1,0 +1,52 @@
+@import "settings";
+@import "../node_modules/zurb-foundation-5/scss/foundation/components/buttons";
+@import "../node_modules/zurb-foundation-5/scss/foundation/components/forms";
+@import "../node_modules/zurb-foundation-5/scss/foundation/components/tabs";
+@import "../node_modules/zurb-foundation-5/scss/foundation/components/icon-bar";
+
+body {
+  @extend body;
+  display: block;
+  position: relative;
+  min-width: 480px;
+  min-height: 280px;
+  padding: 15px;
+  h1, label {
+    color: scale-color($jet, $lightness: 30%);
+  }
+}
+
+/* Load animation */
+@-webkit-keyframes load {
+  0% {
+    stroke-dashoffset: 0
+  }
+}
+
+@keyframes load {
+  0% {
+    stroke-dashoffset: 0
+  }
+}
+
+/* Container */
+
+.progress-meter {
+
+  .background {
+    fill: #fff;
+  }
+
+  .foreground {
+    fill: #00D12D;
+  }
+
+  text {
+    font-weight: bold;
+    font-size: 45px;
+  }
+
+  .text2 {
+    font-size: 14px;
+  }
+}
