@@ -1,16 +1,11 @@
 angular.module('controller')
     .controller('mainCtrl', ['$scope', function ($scope) {
-        $scope.tab = 1;
+        $scope.tab = 0;
 
         $scope.setTab = function (item) {
             $scope.tab = item;
         };
 
-
-        $scope.treeData = [
-            {name: "Root", file: "test.txt"},
-            {name: "Root", file: "test.txt"},
-            {name: "Root", file: "test.txt"},
-            {name: "Root", file: "test.txt"}
-        ];
+        $scope.status = [{"docs": [{"filename": "LastResortTAB.jpg"}],"video": [{"filename": "LastResortTAB.jpg"}]}];
+        //console.log($scope.status);
     }]);

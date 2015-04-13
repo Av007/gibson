@@ -1,4 +1,4 @@
-window.requestFileSystem  = window.requestFileSystem || window.webkitRequestFileSystem;
+/*window.requestFileSystem  = window.requestFileSystem || window.webkitRequestFileSystem;
 
 window.webkitStorageInfo.requestQuota(PERSISTENT, 1024*1024*1024, function(grantedBytes) {
     window.requestFileSystem(PERSISTENT, grantedBytes, onInitFs, errorHandler);
@@ -44,12 +44,7 @@ function errorHandler(e) {
     }
 
     console.log('Error: ' + msg);
-}
-
-
-
-
-/*
+}*/
 
 var html = document.body.innerHTML;
 
@@ -69,11 +64,13 @@ var object = {
 };
 
 object = validate(object);
+storage.push(object);
 
-chrome.storage.local.set({state: object});
+chrome.storage.local.set({state: storage});
 
 chrome.storage.local.get("state", function(items) {
     console.log(items);
+    localStorage.setItem("state", items);
 });
 
 // TODO start here...
@@ -162,4 +159,3 @@ function ValidationException(value) {
         return this.value + this.message
     };
 }
-*/

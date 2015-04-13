@@ -14,39 +14,41 @@
 </head>
 <body ng-controller="mainCtrl">
     <div class="row">
-        <h1>Gibson Grub</h1>
+        <div class="small-12 columns">
 
-        <ul class="tabs" data-tab role="tablist">
-            <li class="tab-title" role="presentational" ng:class="{true:'active', false:''}[tab==0]">
-                <a href="#panel2-1" role="tab" tabindex="0" aria-selected="true" controls="panel2-1" ng-click="setTab(0)">Dashboard</a>
-            </li>
-            <li class="tab-title" role="presentational" ng:class="{true:'active', false:''}[tab==1]">
-                <a href="#panel2-2" role="tab" tabindex="0" aria-selected="false" controls="panel2-2" ng-click="setTab(1)">Folders</a>
-            </li>
-            <li class="tab-title" role="presentational" ng:class="{true:'active', false:''}[tab==2]">
-                <a href="#panel2-3" role="tab" tabindex="0" aria-selected="false" controls="panel2-3" ng-click="setTab(2)">Settings</a>
-            </li>
-        </ul>
-        <div class="tabs-content">
-            <section role="tabpanel" aria-hidden="false" class="content" id="panel2-1" ng:class="{true:'active', false:''}[tab==0]">
-                <div id="progress" data-value=".75" d3></div>
+            <h1>Gibson Grub</h1>
 
-                <button class="button expand">Start</button>
-            </section>
-            <section role="tabpanel" aria-hidden="true" class="content" id="panel2-2" ng:class="{true:'active', false:''}[tab==1]">
-                <ul>
-                    <li ng-repeat="node in treeData">
-                        <i class="fi-folder"></i> {{node.name}}
-                        <i class="fi-page-filled"></i> {{node.name}}
+            <ul class="tabs" data-tab role="tablist">
+                <li class="tab-title" role="presentational" ng:class="{true:'active', false:''}[tab==0]">
+                    <a href="#panel2-1" role="tab" tabindex="0" aria-selected="true" controls="panel2-1" ng-click="setTab(0)"><i class="fi-home size-14"></i> Dashboard</a>
+                </li>
+                <li class="tab-title" role="presentational" ng:class="{true:'active', false:''}[tab==1]">
+                    <a href="#panel2-2" role="tab" tabindex="0" aria-selected="false" controls="panel2-2" ng-click="setTab(1)"><i class="fi-list-thumbnails"></i> Folders</a>
+                </li>
+                <li class="tab-title" role="presentational" ng:class="{true:'active', false:''}[tab==2]">
+                    <a href="#panel2-3" role="tab" tabindex="0" aria-selected="false" controls="panel2-3" ng-click="setTab(2)"><i class="fi-widget"></i> Settings</a>
+                </li>
+            </ul>
+            <div class="tabs-content">
+                <section role="tabpanel" aria-hidden="false" class="content text-center" id="panel2-1" ng:class="{true:'active', false:''}[tab==0]">
+                    <div id="progress" data-value=".75" d3></div>
 
-                        <i class="fi-folder-add"></i> {{node.name}}
-                        <i class="fi-page-add"></i> {{node.name}}
-                    </li>
-                </ul>
-            </section>
-            <section role="tabpanel" aria-hidden="true" class="content" id="panel2-3" ng:class="{true:'active', false:''}[tab==2]">
-                <h2>Third panel content goes here...</h2>
-            </section>
+                    <button class="button expand">Start</button>
+                </section>
+                <section role="tabpanel" aria-hidden="true" class="content" id="panel2-2" ng:class="{true:'active', false:''}[tab==1]">
+                    <ul>
+                        <li ng-repeat="node in status">
+                            <li><i class="fi-folder"></i> {{node.docs.filename}}</li>
+                            <li><i class="fi-page-filled"></i> {{node.video.filename}}</li>
+                            <!--<i class="fi-folder-add"></i> {{node.name}}
+                            <i class="fi-page-add"></i> {{node.name}}-->
+                        </li>
+                    </ul>
+                </section>
+                <section role="tabpanel" aria-hidden="true" class="content" id="panel2-3" ng:class="{true:'active', false:''}[tab==2]">
+                    <h2>Third panel content goes here...</h2>
+                </section>
+            </div>
         </div>
     </div>
 </body>

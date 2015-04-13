@@ -1,8 +1,8 @@
 @import "settings";
 @import "../node_modules/zurb-foundation-5/scss/foundation/components/buttons";
-@import "../node_modules/zurb-foundation-5/scss/foundation/components/forms";
+//@import "../node_modules/zurb-foundation-5/scss/foundation/components/forms";
 @import "../node_modules/zurb-foundation-5/scss/foundation/components/tabs";
-@import "../node_modules/zurb-foundation-5/scss/foundation/components/icon-bar";
+@import "../node_modules/zurb-foundation-5/scss/foundation/components/type";
 
 body {
   @extend body;
@@ -49,4 +49,23 @@ body {
   .text2 {
     font-size: 14px;
   }
+}
+
+.tabs .tab-title > a {
+  font-size: 10px;
+  font-weight: bold;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+
+.tabs {
+  margin: 0px auto;
+  display: block;
+  position: relative;
+}
+
+.button.expand {
+  font-size: 14px;
+  font-weight: bold;
+  text-transform: uppercase;
 }
