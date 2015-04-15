@@ -1,4 +1,5 @@
 @import "settings";
+@import "tree";
 @import "../node_modules/zurb-foundation-5/scss/foundation/components/buttons";
 //@import "../node_modules/zurb-foundation-5/scss/foundation/components/forms";
 @import "../node_modules/zurb-foundation-5/scss/foundation/components/tabs";
@@ -30,6 +31,9 @@ body {
 }
 
 /* Container */
+h1 {
+  font-size: 18px;
+}
 
 .progress-meter {
 
@@ -52,10 +56,11 @@ body {
 }
 
 .tabs .tab-title > a {
-  font-size: 10px;
+  font-size: 16px;
   font-weight: bold;
   text-transform: uppercase;
   text-decoration: none;
+  padding: .8rem 1rem;
 }
 
 .tabs {

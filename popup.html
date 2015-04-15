@@ -36,13 +36,30 @@
                     <button class="button expand">Start</button>
                 </section>
                 <section role="tabpanel" aria-hidden="true" class="content" id="panel2-2" ng:class="{true:'active', false:''}[tab==1]">
-                    <ul>
-                        <li ng-repeat="node in status">
-                            <li><i class="fi-folder"></i> {{node.docs.filename}}</li>
-                            <li><i class="fi-page-filled"></i> {{node.video.filename}}</li>
+                    <ul class="tree" ng-repeat="node in status">
+                        <li><i class="fi-folder"></i>
+                            <ul>
+                                <li><i class="fi-folder"></i> Docs
+                                    <ul>
+                                        <li ng-repeat="job in node.docs">
+                                            <i class="fi-page-filled"></i> {{job.filename}}
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                            <ul>
+                                <li><i class="fi-folder"></i> Video
+                                    <ul>
+                                        <li ng-repeat="job in node.video">
+                                            <i class="fi-page-filled"></i> {{job.filename}}
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+
                             <!--<i class="fi-folder-add"></i> {{node.name}}
                             <i class="fi-page-add"></i> {{node.name}}-->
-                        </li>
                     </ul>
                 </section>
                 <section role="tabpanel" aria-hidden="true" class="content" id="panel2-3" ng:class="{true:'active', false:''}[tab==2]">

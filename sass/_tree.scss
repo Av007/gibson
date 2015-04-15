@@ -1,0 +1,49 @@
+.tree,
+.tree ul {
+  padding: 0;
+  list-style: none;
+  font-size: 13px;
+  font-weight: bold;
+  margin-left: 4px; /* indentation */
+  position: relative;
+  li {
+    margin: 0;
+    padding: 0 12px; /* indentation + .5em */
+    line-height: 17px; /* default list item's `line-height` */
+    font-weight: bold;
+    position: relative;
+    font-size: 11px;
+  }
+  
+  ul {
+    margin-left: 5px;
+    &:before {
+      content: "";
+      display: block;
+      width: 0;
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      border-left: 1px solid;
+    }
+
+    li:before {
+      content: "";
+      display: block;
+      width: 10px; /* same with indentation */
+      height: 0;
+      border-top: 1px solid;
+      margin-top: -2px; /* border top width */
+      position: absolute;
+      top: 1em; /* (line-height/2) */
+      left: 0;
+    }
+
+    li:last-child:before {
+      height: auto;
+      top: 1em; /* (line-height/2) */
+      bottom: 0;
+    }
+  }
+}

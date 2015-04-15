@@ -6,6 +6,15 @@ angular.module('controller')
             $scope.tab = item;
         };
 
-        $scope.status = [{"docs": [{"filename": "LastResortTAB.jpg"}],"video": [{"filename": "LastResortTAB.jpg"}]}];
+        $scope.status = [
+            {
+                "docs": [
+                    {"filename": "LastResortTAB.jpg"}
+                ],
+                "video": [
+                    {"filename": "LastResortTAB.jpg"}
+                ]
+            }
+        ];
         //console.log($scope.status);
     }]);
