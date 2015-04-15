@@ -10,7 +10,7 @@ body {
   display: block;
   position: relative;
   min-width: 480px;
-  min-height: 280px;
+  height: 280px;
   padding: 15px;
   h1, label {
     color: scale-color($jet, $lightness: 30%);

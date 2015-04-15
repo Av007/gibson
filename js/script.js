@@ -48,8 +48,6 @@ function errorHandler(e) {
 
 var html = document.body.innerHTML;
 
-var storage = [];
-
 var patternVideo = new RegExp("http?:\\/\\/[^\\s]+\\.mp4", "gi");
 var patternDocs = new RegExp("http?:\\/\\/[^\\s]+\\.pdf", "gi");
 var patternDocs1 = new RegExp("http?:\\/\\/[^\\s]+\\.jpg", "gi");
@@ -64,13 +62,11 @@ var object = {
 };
 
 object = validate(object);
-storage.push(object);
 
-chrome.storage.local.set({state: storage});
-
-chrome.storage.local.get("state", function(items) {
-    console.log(items);
-    localStorage.setItem("state", items);
+//chrome.storage.sync.set({state: []});
+chrome.storage.sync.get("state", function(items) {
+    items.state.push(object);
+    chrome.storage.sync.set({state: items.state});
 });
 
 // TODO start here...

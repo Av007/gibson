@@ -36,8 +36,8 @@
                     <button class="button expand">Start</button>
                 </section>
                 <section role="tabpanel" aria-hidden="true" class="content" id="panel2-2" ng:class="{true:'active', false:''}[tab==1]">
-                    <ul class="tree" ng-repeat="node in status">
-                        <li><i class="fi-folder"></i>
+                    <ul class="tree">
+                        <li ng-repeat="node in status"><i class="fi-folder"></i>
                             <ul>
                                 <li><i class="fi-folder"></i> Docs
                                     <ul>
@@ -57,10 +57,11 @@
                                 </li>
                             </ul>
                         </li>
-
-                            <!--<i class="fi-folder-add"></i> {{node.name}}
-                            <i class="fi-page-add"></i> {{node.name}}-->
                     </ul>
+                    <!--<i class="fi-folder-add"></i> {{node.name}}
+                            <i class="fi-page-add"></i> {{node.name}}-->
+
+                    <button class="button expand">Download</button>
                 </section>
                 <section role="tabpanel" aria-hidden="true" class="content" id="panel2-3" ng:class="{true:'active', false:''}[tab==2]">
                     <h2>Third panel content goes here...</h2>

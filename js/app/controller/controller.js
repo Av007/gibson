@@ -6,15 +6,7 @@ angular.module('controller')
             $scope.tab = item;
         };
 
-        $scope.status = [
-            {
-                "docs": [
-                    {"filename": "LastResortTAB.jpg"}
-                ],
-                "video": [
-                    {"filename": "LastResortTAB.jpg"}
-                ]
-            }
-        ];
-        //console.log($scope.status);
+        chrome.storage.sync.get("state", function(value) {
+            $scope.status = value.state;
+        });
     }]);
