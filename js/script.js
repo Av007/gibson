@@ -54,22 +54,26 @@ var patternDocs1 = new RegExp("http?:\\/\\/[^\\s]+\\.jpg", "gi");
 
 var videos = html.match(patternVideo),
     docs = html.match(patternDocs),
-    docs1 = html.match(patternDocs1);
+    docs1 = html.match(patternDocs1),
+    source;
 
 var object = {
     video: parseItem(videos),
-    docs: getDocs([docs, docs1])
+    docs: getDocs([docs, docs1]),
+    source: source
 };
 
 object = validate(object);
 
-//chrome.storage.sync.set({state: []});
+//chrome.storage.sync.clear();
 chrome.storage.sync.get("state", function(items) {
+    if (items.state == undefined) {
+        items.state = [];
+    }
     items.state.push(object);
+    items.state = removeDuplicates(items.state);
     chrome.storage.sync.set({state: items.state});
 });
-
-// TODO start here...
 
 function getDocs(array) {
     var object = [];
@@ -89,6 +93,7 @@ function parseItem(array) {
     for (var i = 0; i < array.length; i++) {
         var segments = array[i].split("/");
 
+        source = segments[segments.length - 2];
         object.push({
             source: array[i],
             filename: array[i].substr(array[i].lastIndexOf("/") + 1),
