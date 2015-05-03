@@ -13,14 +13,12 @@ angular.module("controller")
 
             if (value.state != undefined) {
                 for (var i = 0; i < value.state.length; i++) {
-                    if (!value.state.saved || value.state.saved == undefined) {
-                        for (var j = 0; j < value.state[i].docs.length; j++) {
-                            downloadFile(value.state[i].docs[j], value.state[i].source);
-                        }
+                    for (var j = 0; j < value.state[i].docs.length; j++) {
+                        downloadFile(value.state[i].docs[j], value.state[i].source);
+                    }
 
-                        for (j = 0; j < value.state[i].video.length; j++) {
-                            downloadFile(value.state[i].video[j], value.state[i].source);
-                        }
+                    for (j = 0; j < value.state[i].video.length; j++) {
+                        downloadFile(value.state[i].video[j], value.state[i].source);
                     }
                 }
             }
@@ -62,12 +60,17 @@ angular.module("controller")
         };
 
         var downloadFile = function (file, directory) {
-            $scope.files++;
-            Content.download(file, function () {
-                file.data = this.response;
-                file = Storage.save(file, directory);
-                $scope.files--;
-            }, onProgress);
+            if (!file.saved || file.saved == undefined) {
+                $scope.files++;
+                Content.download(file, function () {
+                    file.data = this.response;
+                    file = Storage.save(file, directory);
+
+                    chrome.storage.sync.clear();
+                    chrome.storage.sync.set({state: $scope.status});
+                    $scope.files--;
+                }, onProgress);
+            }
         }
     }]
 );
