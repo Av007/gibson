@@ -7,6 +7,8 @@
     <script src="/js/angular.min.js"></script>
     <script src="/js/app/app.js"></script>
     <script src="/js/app/controller/controller.js"></script>
+    <script src="/js/app/factories/storage.js"></script>
+    <script src="/js/app/factories/content.js"></script>
     <script src="/js/app/directives/d3.js"></script>
     <script src="/js/app/directives/tree.js"></script>
     <link href="/css/main.css" media="screen, projection" rel="stylesheet" type="text/css"/>
@@ -31,13 +33,14 @@
             </ul>
             <div class="tabs-content">
                 <section role="tabpanel" aria-hidden="false" class="content text-center" id="panel2-1" ng:class="{true:'active', false:''}[tab==0]">
-                    <div id="progress" data-value=".75" d3></div>
+                    <div id="progress" data-value="{{progress}}" d3></div>
 
                     <button class="button expand">Start</button>
                 </section>
                 <section role="tabpanel" aria-hidden="true" class="content" id="panel2-2" ng:class="{true:'active', false:''}[tab==1]">
                     <ul class="tree">
-                        <li ng-repeat="node in status"><i class="fi-folder"></i>
+                        <li ng-repeat="node in status track by $index">
+                            <i class="fi-folder"></i> {{node.source}}
                             <ul>
                                 <li><i class="fi-folder"></i> Docs
                                     <ul>

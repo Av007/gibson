@@ -10,7 +10,6 @@ angular.module('app.d3')
             },
             link: function(scope, iElement, iAttrs) {
                 var progress = 0,
-                    total = 100,
                     d3 = $window.d3,
                     formatPercent = d3.format(".0%");
 
@@ -169,7 +168,9 @@ angular.module('app.d3')
                     });
                 };
 
-                animate(iElement[0].getAttribute("data-value"));
+                setInterval(function () {
+                    animate(iAttrs.value)
+                }, 1000);
             }
         }
     });

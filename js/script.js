@@ -1,51 +1,3 @@
-/*window.requestFileSystem  = window.requestFileSystem || window.webkitRequestFileSystem;
-
-window.webkitStorageInfo.requestQuota(PERSISTENT, 1024*1024*1024, function(grantedBytes) {
-    window.requestFileSystem(PERSISTENT, grantedBytes, onInitFs, errorHandler);
-}, function(e) {
-    console.log('Error', e);
-});
-
-function onInitFs(fs) {
-    var dirReader = fs.root.createReader();
-
-    // Call the reader.readEntries() until no more results are returned.
-    var readEntries = function() {
-        dirReader.readEntries (function(results) {
-            console.log(results);
-        }, errorHandler);
-    };
-
-    readEntries(); // Start reading dirs.
-}
-
-function errorHandler(e) {
-    var msg = '';
-
-    switch (e.code) {
-        case FileError.QUOTA_EXCEEDED_ERR:
-            msg = 'QUOTA_EXCEEDED_ERR';
-            break;
-        case FileError.NOT_FOUND_ERR:
-            msg = 'NOT_FOUND_ERR';
-            break;
-        case FileError.SECURITY_ERR:
-            msg = 'SECURITY_ERR';
-            break;
-        case FileError.INVALID_MODIFICATION_ERR:
-            msg = 'INVALID_MODIFICATION_ERR';
-            break;
-        case FileError.INVALID_STATE_ERR:
-            msg = 'INVALID_STATE_ERR';
-            break;
-        default:
-            msg = 'Unknown Error';
-            break;
-    }
-
-    console.log('Error: ' + msg);
-}*/
-
 var html = document.body.innerHTML;
 
 var patternVideo = new RegExp("http?:\\/\\/[^\\s]+\\.mp4", "gi");
@@ -60,7 +12,9 @@ var videos = html.match(patternVideo),
 var object = {
     video: parseItem(videos),
     docs: getDocs([docs, docs1]),
-    source: source
+    source: source,
+    status: "parsed",
+    saved: false
 };
 
 object = validate(object);
@@ -97,7 +51,8 @@ function parseItem(array) {
         object.push({
             source: array[i],
             filename: array[i].substr(array[i].lastIndexOf("/") + 1),
-            path: segments[segments.length - 2]
+            path: segments[segments.length - 2],
+            data: null
         });
     }
 
