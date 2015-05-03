@@ -8,31 +8,51 @@ angular.module("controller")
             $scope.tab = item;
         };
 
-        chrome.storage.sync.get("state", function(value) {
+        chrome.storage.sync.get("state", function (value) {
             $scope.status = value.state;
 
             if (value.state != undefined) {
                 for (var i = 0; i < value.state.length; i++) {
                     if (!value.state.saved || value.state.saved == undefined) {
                         for (var j = 0; j < value.state[i].docs.length; j++) {
-                            downloadFile(value.state[i].docs[j]);
+                            downloadFile(value.state[i].docs[j], value.state[i].source);
                         }
 
                         for (j = 0; j < value.state[i].video.length; j++) {
-                            downloadFile(value.state[i].video[j]);
+                            downloadFile(value.state[i].video[j], value.state[i].source);
                         }
                     }
                 }
             }
         });
 
-        $scope.$watch("progress", function(newValue) {
-            $scope.progress = newValue;
-        });
+        $scope.avg = [];
 
         var onProgress = function (event) {
             if (event.lengthComputable) {
-                $scope.progress = (event.loaded / event.total) / $scope.files;
+                var href = event.target.responseURL,
+                    sum = 0,
+                    isFound = false;
+
+                for (item in $scope.avg) {
+                    if ($scope.avg[item].name == href.split('/')[5]) {
+                        $scope.avg[item].value = event.loaded / event.total;
+                        isFound = true;
+                    }
+                }
+
+                if (!isFound) {
+                    $scope.avg.push({
+                        name: href.split('/')[5],
+                        value: event.loaded / event.total
+                    });
+                }
+
+                for (item in $scope.avg) {
+                    sum += $scope.avg[item].value;
+                }
+
+                $scope.progress = (sum / $scope.avg.length) / $scope.files;
                 $scope.progress = Math.round($scope.progress * 100) / 100;
 
                 $scope.$apply(function () {
@@ -40,11 +60,12 @@ angular.module("controller")
                 });
             }
         };
-        
-        var downloadFile = function (file) {
+
+        var downloadFile = function (file, directory) {
             $scope.files++;
             Content.download(file, function () {
                 file.data = this.response;
+                file = Storage.save(file, directory);
                 $scope.files--;
             }, onProgress);
         }

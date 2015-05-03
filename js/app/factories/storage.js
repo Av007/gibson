@@ -1,22 +1,24 @@
 angular.module("app")
     .factory("Storage", function () {
-        var Storage = {};
+        var Storage = {
+            init: syncStorage(),
+            fileSystem: null,
+            capacity: 0,
+            getCapacity: function () {
+                this.capacity;
+            }
+        };
 
-        var entity = null,
-            file = null;
+        Storage.save = function (item, directory) {
+            saveFile(directory, item);
+            item.saved = true;
 
-        Storage.save = function (item) {
-            entity = item;
-
-            syncStorage();
-            entity.saved = true;
-
-            return entity
+            return item;
         };
 
         function syncStorage() {
             navigator.webkitPersistentStorage.queryUsageAndQuota(function (usedBytes, grantedBytes) {
-                //console.log("we are using ", usedBytes, " of ", grantedBytes, "bytes");
+                capacity = Math.round(usedBytes / grantedBytes * 1000) / 100;
             }, errorHandler);
 
             var requestedBytes = 1024 * 1024 * 280;
@@ -27,37 +29,20 @@ angular.module("app")
         }
 
         function onInitFs(fs) {
-            fs.root.getDirectory(entity.source.toString(), {create: true}, function (directory) {
+            Storage.fileSystem = fs;
+        }
 
-                for (var j = 0; j < entity.docs.length; j++) {
-                    file = entity.docs[j];
+        function saveFile(directoryName, file) {
+            Storage.fileSystem.root.getDirectory(directoryName, {create: true}, function (directory) {
+                if (file.data instanceof Blob) {
+                    Storage.fileSystem.root.getFile(file.filename.toString(), {create: true}, function (fileEntry) {
+                        fileEntry.createWriter(function (fileWriter) {
+                            fileWriter.onerror = errorHandler;
 
-                    if (file.data instanceof Blob && (file.data.length > 0)) {
-                        fs.root.getFile(file.filename.toString(), {create: true}, function (fileEntry) {
-                            fileEntry.createWriter(function (fileWriter) {
-                                fileWriter.onerror = errorHandler;
-
-                                fileWriter.write(file.data);
-                                fileEntry.moveTo(directory);
-
-                            }, errorHandler);
+                            fileWriter.write(file.data);
+                            fileEntry.copyTo(directory);
                         }, errorHandler);
-                    }
-                }
-
-                for (j = 0; j < entity.video.length; j++) {
-                    file = entity.video[j];
-
-                    if (file.data instanceof Blob && (file.data.length > 0)) {
-                        fs.root.getFile(file.filename.toString(), {create: true}, function (fileEntry) {
-                            fileEntry.createWriter(function (fileWriter) {
-                                fileWriter.onerror = errorHandler;
-                                fileWriter.write(file.data);
-                                fileEntry.moveTo(directory);
-
-                            }, errorHandler);
-                        }, errorHandler);
-                    }
+                    }, errorHandler);
                 }
             });
         }
