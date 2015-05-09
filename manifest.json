@@ -1,27 +1,32 @@
 {
   "manifest_version": 2,
-
   "name": "Gibson Grub",
   "description": "This extension video from gibson com",
   "version": "1.0",
-
   "browser_action": {
     "default_name": "Gibson Grub",
     "default_icon": "icon.png",
     "default_popup": "popup.html"
   },
-
   "content_scripts": [
     {
-      "matches": ["http://www2.gibson.com/*", "http://lm.gibson.com/*"],
-      "js": ["js/script.js"]
+      "matches": [
+        "http://www2.gibson.com/*",
+        "http://lm.gibson.com/*"
+      ],
+      "js": ["/js/script.js"]
     }
   ],
+  "background": {
+    "persistent": false,
+    "scripts": ["/js/background.js"]
+  },
   "permissions": [
-    "storage",
-    "unlimitedStorage",
     "tabs",
+    "storage",
     "activeTab",
+    "background",
+    "unlimitedStorage",
     "http://www2.gibson.com/*"
   ]
 }

@@ -7,8 +7,6 @@
     <script src="/js/angular.min.js"></script>
     <script src="/js/app/app.js"></script>
     <script src="/js/app/controller/controller.js"></script>
-    <script src="/js/app/factories/storage.js"></script>
-    <script src="/js/app/factories/content.js"></script>
     <script src="/js/app/directives/d3.js"></script>
     <script src="/js/app/directives/tree.js"></script>
     <link href="/css/main.css" media="screen, projection" rel="stylesheet" type="text/css"/>
@@ -64,7 +62,7 @@
                     <!--<i class="fi-folder-add"></i> {{node.name}}
                             <i class="fi-page-add"></i> {{node.name}}-->
 
-                    <button class="button expand">Download</button>
+                    <button class="button expand" ng-click="send()">Download</button>
                 </section>
                 <section role="tabpanel" aria-hidden="true" class="content" id="panel2-3" ng:class="{true:'active', false:''}[tab==2]">
                     <h2>Third panel content goes here...</h2>

@@ -1,10 +1,10 @@
-var html = document.body.innerHTML;
+var html = document.body.innerHTML,
 
-var patternVideo = new RegExp("http?:\\/\\/[^\\s]+\\.mp4", "gi");
-var patternDocs = new RegExp("http?:\\/\\/[^\\s]+\\.pdf", "gi");
-var patternDocs1 = new RegExp("http?:\\/\\/[^\\s]+\\.jpg", "gi");
+    patternVideo = new RegExp("http?:\\/\\/[^\\s]+\\.mp4", "gi"),
+    patternDocs = new RegExp("http?:\\/\\/[^\\s]+\\.pdf", "gi"),
+    patternDocs1 = new RegExp("http?:\\/\\/[^\\s]+\\.jpg", "gi"),
 
-var videos = html.match(patternVideo),
+    videos = html.match(patternVideo),
     docs = html.match(patternDocs),
     docs1 = html.match(patternDocs1),
     source;
@@ -19,7 +19,7 @@ var object = {
 
 object = validate(object);
 
-//chrome.storage.sync.clear();
+chrome.storage.sync.clear();
 chrome.storage.sync.get("state", function(items) {
     if (items.state == undefined) {
         items.state = [];
