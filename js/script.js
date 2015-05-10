@@ -19,7 +19,7 @@ var object = {
 
 object = validate(object);
 
-chrome.storage.sync.clear();
+//chrome.storage.sync.clear();
 chrome.storage.sync.get("state", function(items) {
     if (items.state == undefined) {
         items.state = [];
