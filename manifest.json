@@ -17,6 +17,12 @@
       "js": ["/js/script.js"]
     }
   ],
+  "oauth2": {
+    "client_id": "793626930836-jk4nco9t68hq4at4280rbrrr0nalep90.apps.googleusercontent.com",
+    "scopes": [
+      "https://www.googleapis.com/auth/drive"
+    ]
+  },
   "background": {
     "persistent": false,
     "scripts": ["/js/background.js"]
@@ -24,9 +30,12 @@
   "permissions": [
     "tabs",
     "storage",
+    "identity",
     "activeTab",
     "background",
     "unlimitedStorage",
-    "http://www2.gibson.com/*"
+    "http://www2.gibson.com/*",
+    "https://www.googleapis.com/*",
+    "https://accounts.google.com/"
   ]
 }

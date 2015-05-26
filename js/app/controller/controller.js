@@ -28,5 +28,11 @@ angular.module("controller")
                 }
             });
         }
+
+        $scope.auth = function () {
+            chrome.identity.getAuthToken({"interactive": true}, function (token) {
+                console.log(token);
+            });
+        }
     }]
 );
