@@ -1,3 +1,3 @@
 # gibson
 
-###Chrome extention plugin
+### Chrome extention plugin
