@@ -2,4 +2,4 @@
 
 ### Chrome extention plugin
 
-Downloading the video, pdf lessons from gibson.com.
+Downloading the video, pdf lessons from http://gibson.com.
